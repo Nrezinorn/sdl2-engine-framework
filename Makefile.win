@@ -1,0 +1,27 @@
+
+CXX = c:\\msys64\\mingw64\\bin\\g++
+CXXFLAGS=-g -fpermissive -DDEBUG -IC:/msys64/mingw64/bin/../include -IC:/msys64/mingw64/bin/../include/SDL2 -Dmain=SDL_main -LC:/msys64/mingw64/bin/../lib
+LDFLAGS= -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+
+PROG=demo
+
+#give up on object files in a folder of their own for now
+OBJDIR=obj
+
+src = $(wildcard src/*.cpp) \
+	$(wildcard src/Engine/*.cpp)
+obj = $(SOURCES:.cpp=.o)
+dep = $(obj:.o=.d)
+
+#http://nuclear.mutantstargoat.com/articles/make/  
+# buy this guy a beer or soda
+
+all:  $(PROG) 
+
+$(PROG): $(obj)
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
+
+.PHONY: clean
+
+clean:
+	del /f /s $(obj)
