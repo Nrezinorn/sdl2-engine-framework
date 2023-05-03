@@ -1,6 +1,5 @@
-
-CXX = c:\\msys64\\mingw64\\bin\\g++
-CXXFLAGS=-g -fpermissive -DDEBUG -IC:/msys64/mingw64/bin/../include -IC:/msys64/mingw64/bin/../include/SDL2 -Dmain=SDL_main -LC:/msys64/mingw64/bin/../lib
+CXX = g++
+CXXFLAGS=-g -fpermissive -DDEBUG -IC:\\msys64\\mingw64\\include -LC:\\msys64\\mingw64\\lib -Dmain=SDL_main
 LDFLAGS= -lmingw32 -mwindows -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 PROG=demo
@@ -10,7 +9,7 @@ OBJDIR=obj
 
 src = $(wildcard src/*.cpp) \
 	$(wildcard src/Engine/*.cpp)
-obj = $(SOURCES:.cpp=.o)
+obj = $(src:.cpp=.o)
 dep = $(obj:.o=.d)
 
 #http://nuclear.mutantstargoat.com/articles/make/  

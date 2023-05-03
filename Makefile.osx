@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS=-g -fpermissive -DDEBUG -Dmain=SDL_main
-LDFLAGS= -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+CXXFLAGS=-g -fpermissive -DDEBUG -F/Library/Frameworks
+LDFLAGS= -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework SDL2_mixer -framework cocoa
 
 PROG=demo
 
