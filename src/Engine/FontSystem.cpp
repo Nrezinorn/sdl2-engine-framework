@@ -21,7 +21,7 @@ bool cFont::Create(std::string *Name, long Size, bool Bold, bool Italic, bool Un
   }
   
   #if __APPLE__
-    fp = "/System/Library/Fonts/Supplemental/Times New Roman.ttf";
+    fp = new std::string("/System/Library/Fonts/Supplemental/Times New Roman.ttf");
   #endif
 
   #if _WIN64
@@ -30,7 +30,7 @@ bool cFont::Create(std::string *Name, long Size, bool Bold, bool Italic, bool Un
   
   //todo:  use the name to load the font every time
   //enjoy this kludge for now
-  if (Name != fp)  fp == Name;
+  if (Name != fp)  fp = Name;
 
   //first time loading TTF?  Init TTF lazily
   if(!TTF_WasInit())  TTF_Init();
