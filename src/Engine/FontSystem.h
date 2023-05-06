@@ -17,7 +17,7 @@ extern const char *FONT_PATH;
 class cFont
 {
   private:
-    char *fp;
+    std::string *fp;
     TTF_Font *m_Font;
     bool m_Centered;
     uint8_t m_FontFlags;
@@ -26,7 +26,7 @@ class cFont
     cFont();
     ~cFont();
 
-    bool Create(const char *Name, long Size = 16,
+    bool Create(std::string *Name, long Size = 16,
 				bool Bold = false, bool Italic = false,
 				bool Underline = false, bool Strikeout = false);
     

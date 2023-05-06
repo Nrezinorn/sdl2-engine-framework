@@ -12,7 +12,7 @@ cFont::~cFont()
 }
 
 //Create a Texture from given text, and store as SDL Texture ready to use
-bool cFont::Create(const char *Name, long Size, bool Bold, bool Italic, bool Underline, bool Strikeout)
+bool cFont::Create(std::string *Name, long Size, bool Bold, bool Italic, bool Underline, bool Strikeout)
 {
   if(Name == NULL)
   {
@@ -25,8 +25,12 @@ bool cFont::Create(const char *Name, long Size, bool Bold, bool Italic, bool Und
   #endif
 
   #if _WIN64
-    fp = "C://Windows//Fonts//times.ttf";
+    fp = new std::string("C://Windows//Fonts//times.ttf");
   #endif
+  
+  //todo:  use the name to load the font every time
+  //enjoy this kludge for now
+  if (Name != fp)  fp == Name;
 
   //first time loading TTF?  Init TTF lazily
   if(!TTF_WasInit())  TTF_Init();
@@ -40,7 +44,7 @@ bool cFont::Create(const char *Name, long Size, bool Bold, bool Italic, bool Und
   if(Strikeout)  m_FontFlags |= TTF_STYLE_STRIKETHROUGH;
 
   //m_Font = TTF_OpenFont(this->fp + *Name + '.ttf', Size);
-  m_Font = TTF_OpenFont(fp, Size);
+  m_Font = TTF_OpenFont(fp->c_str(), Size);
 
   TTF_SetFontStyle(m_Font, m_FontFlags);
   
