@@ -17,10 +17,10 @@ using namespace std;
 // ERRORCONTROL IS WINDOWS SPECIFIC?
 //#include "ErrorControl.h"
 
-class cGraphics;
+class CGraphics;
 class cTexture;
 
-class cGraphics
+class CGraphics
 {
 protected:
 	  //HWND              m_hWnd;
@@ -36,8 +36,8 @@ protected:
 	  long              m_Height;
 
 public:
-    cGraphics();
-    ~cGraphics();
+    CGraphics();
+    ~CGraphics();
 
 	//IDirect3D8       *GetDirect3DCOM();
     //IDirect3DDevice8 *GetDeviceCOM();
@@ -67,7 +67,7 @@ public:
 class cTexture
 {
   protected:
-    cGraphics          *m_Graphics;
+    CGraphics          *m_Graphics;
     SDL_Surface        *m_Surface;
     SDL_Texture        *m_Texture;
     // alpha value for quick modification
@@ -81,13 +81,13 @@ class cTexture
     cTexture();
     ~cTexture();
 
-    //bool Load( cGraphics *Graphics, const char* Filename, DWORD Transparent = 0,
+    //bool Load( CGraphics *Graphics, const char* Filename, DWORD Transparent = 0,
 	//	D3DFORMAT Format = D3DFMT_UNKNOWN );
 
     // gfx == our SDL_Renderer already initialized
-    bool Load( cGraphics *graphics, const char *Filename );
+    bool Load( CGraphics *graphics, const char *Filename );
 
-	//bool Create( cGraphics gfx, SDL_Texture *Texture );
+	//bool Create( CGraphics gfx, SDL_Texture *Texture );
     bool Free();
 
     bool      IsLoaded();
@@ -111,8 +111,8 @@ class cTexture
     bool Print(long DestX = 0, long DestY = 0, uint8_t a = 255);
     
     //Create texture from TTf_Font
-    bool CreateFontTexture(cGraphics *Graphics, cFont *Font, const char *Text, uint8_t r ,uint8_t g, uint8_t b);
-    bool CreateFontTextureWrapped(cGraphics *Graphics, cFont *Font, const char *Text, uint8_t r ,uint8_t g, uint8_t b , int WrapSize);
+    bool CreateFontTexture(CGraphics *Graphics, cFont *Font, const char *Text, uint8_t r ,uint8_t g, uint8_t b);
+    bool CreateFontTextureWrapped(CGraphics *Graphics, cFont *Font, const char *Text, uint8_t r ,uint8_t g, uint8_t b , int WrapSize);
     
     SDL_Point GetSrcPoint(int a_Index, int a_FramesPerCol);
     void SetColor(SDL_Color color);

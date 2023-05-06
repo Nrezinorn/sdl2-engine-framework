@@ -1,7 +1,7 @@
 #include "GraphicsCore.h"
 #include <iostream>
 
-cGraphics::cGraphics()
+CGraphics::CGraphics()
 {
   m_window = NULL;
   m_renderer = NULL;
@@ -12,12 +12,12 @@ cGraphics::cGraphics()
   //SDL_Rect textureLocation = { 0, 0, 640, 480};
 }
 
-cGraphics::~cGraphics()
+CGraphics::~CGraphics()
 {
   this->Shutdown();
 }
 
-bool cGraphics::Init()
+bool CGraphics::Init()
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0) {
     fprintf(stderr, "could not initialize sdl2: %s\n", SDL_GetError());
@@ -51,7 +51,7 @@ SDL_RenderClear(this->m_renderer);
 return true;
 }
 
-bool cGraphics::Shutdown()
+bool CGraphics::Shutdown()
 {
   // Need to Destroy window before renderer....of we segfault, wny?
   if (m_window)
@@ -68,7 +68,7 @@ bool cGraphics::Shutdown()
 // Draw texture to renderer
 //TODO: add sprite scaling 
 //TODO: add SDL_RenderFlip flags to function / elsewhere
-bool cGraphics::Draw(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst) {
+bool CGraphics::Draw(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst) {
   
   if (SDL_RenderCopy(this->m_renderer, tex, src, dst) < 0) {
     std::cout << "Error Adding to Renderer" <<std::endl; 
@@ -77,7 +77,7 @@ bool cGraphics::Draw(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst) {
   return true;
 }
 
-bool cGraphics::DrawFlip(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst, SDL_Point *center) {
+bool CGraphics::DrawFlip(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst, SDL_Point *center) {
   if (SDL_RenderCopyEx(this->m_renderer, tex, src, dst, 0, center, SDL_FLIP_HORIZONTAL) < 0) {
     std::cout << "Error Adding to Renderer" <<std::endl; 
   }
@@ -86,7 +86,7 @@ bool cGraphics::DrawFlip(SDL_Texture *tex, SDL_Rect *src, SDL_Rect *dst, SDL_Poi
 }
 
 //For Debugging, hardcode 32x32 rects to the screen with 128 alpha
-bool cGraphics::DrawPrimitiveRectScreen(int ScreenX, int ScreenY) {
+bool CGraphics::DrawPrimitiveRectScreen(int ScreenX, int ScreenY) {
   //screen X/Y are the upper corner to start the rect
 
   SDL_Rect objDstRect = { ScreenX, ScreenY, 32, 32 };
@@ -97,7 +97,7 @@ bool cGraphics::DrawPrimitiveRectScreen(int ScreenX, int ScreenY) {
   return true;
 }
 
-bool cGraphics::DrawRowLineScreen(int ScreenY){
+bool CGraphics::DrawRowLineScreen(int ScreenY){
   // hardcoded X to 0 - 640, use yellow
   uint8_t r,g,b,a;
   SDL_GetRenderDrawColor(this->m_renderer, &r, &g, &b, &a);
@@ -113,7 +113,7 @@ bool cGraphics::DrawRowLineScreen(int ScreenY){
 
 
 //Present all rendered sprites to display, called once per frame
-bool cGraphics::Display()
+bool CGraphics::Display()
 {
   SDL_RenderPresent(this->m_renderer);
 
@@ -121,44 +121,44 @@ bool cGraphics::Display()
 }
 
 // NOTE: This function is used to clear a z-buffer. Use ClearDisplay otherwise
-bool cGraphics::Clear()
+bool CGraphics::Clear()
 {
   //TODO:  Remove this?
   return true; 
 }
 
 // m_renderer is only in our gfx class, so we can just call a clear function on it
-bool cGraphics::ClearDisplay()
+bool CGraphics::ClearDisplay()
 {
   SDL_RenderClear(this->m_renderer);
   return true; 
 }  
 
-bool cGraphics::EnableAlphaBlending(bool Enable ) //prob needs more here for blending
+bool CGraphics::EnableAlphaBlending(bool Enable ) //prob needs more here for blending
 {
   return true;
 }
 
-bool cGraphics::EnableAlphaTesting(bool Enable)
+bool CGraphics::EnableAlphaTesting(bool Enable)
 {
 //TODO:  do we need this anywhere ?  need to find SDL equivalency
   return false;
 }
 
-SDL_Renderer* cGraphics::GetRenderer() {
+SDL_Renderer* CGraphics::GetRenderer() {
   return this->m_renderer;
 }
 
-SDL_Window* cGraphics::GetWindow() {
+SDL_Window* CGraphics::GetWindow() {
   return this->m_window;
 }
 
-long cGraphics::GetWidth()
+long CGraphics::GetWidth()
 {
   return this->m_Width;
 }
 
-long cGraphics::GetHeight()
+long CGraphics::GetHeight()
 {
   return this->m_Height;
 }
@@ -184,7 +184,7 @@ cTexture::~cTexture()
 
 //we pass in the window handler of gfx, but are not using it
 // Calls SDL_LoadBMP() on Filename, loads to m_Surface, sets m_Width and m_Height
-bool cTexture::Load(cGraphics *graphics, const char* Filename )
+bool cTexture::Load(CGraphics *graphics, const char* Filename )
 {
   Free();
   this->m_Graphics = graphics;
@@ -209,7 +209,7 @@ bool cTexture::Load(cGraphics *graphics, const char* Filename )
 
 //surface to texture?  is this even needed?
 /*
-bool cTexture::Create(cGraphics gfx, SDL_Texture *Texture)
+bool cTexture::Create(CGraphics gfx, SDL_Texture *Texture)
 {
   Free();
 
@@ -371,7 +371,7 @@ bool cTexture::Print(long DestX, long DestY, Uint8 a) {
 }
 
 
-bool cTexture::CreateFontTexture(cGraphics *Graphics, cFont *Font, const char *Text,
+bool cTexture::CreateFontTexture(CGraphics *Graphics, cFont *Font, const char *Text,
   uint8_t r, uint8_t g, uint8_t b)
 {
   if(Graphics == NULL || Font == NULL)
@@ -421,7 +421,7 @@ bool cTexture::CreateFontTexture(cGraphics *Graphics, cFont *Font, const char *T
   return true;
 }
 
-bool cTexture::CreateFontTextureWrapped(cGraphics *Graphics, cFont *Font, const char *Text,
+bool cTexture::CreateFontTextureWrapped(CGraphics *Graphics, cFont *Font, const char *Text,
   uint8_t r, uint8_t g, uint8_t b, int WrapSize)
 {
   if(Graphics == NULL || Font == NULL)

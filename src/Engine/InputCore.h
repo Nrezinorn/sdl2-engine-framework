@@ -4,11 +4,11 @@
 //#define WIN32_LEAN_AND_MEAN	
 //#define SafeRelease(x)	if (x) {x->Release(); x=NULL;}
 
-class cGlaceInput
+class CInputCore
 {
 public:
-	cGlaceInput();
-	~cGlaceInput();
+	CInputCore();
+	~CInputCore();
 
 	// Public memembers
 	

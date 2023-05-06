@@ -1,17 +1,17 @@
 #include "InputCore.h"
 
-cGlaceInput::cGlaceInput()
+CInputCore::CInputCore()
 {
 	
 }
 
-cGlaceInput::~cGlaceInput()
+CInputCore::~CInputCore()
 {
 
 }
 
 //Keyboard works out of the box, TODO: initialize the Controller here
-void cGlaceInput::InitializeInput()
+void CInputCore::InitializeInput()
 {
 	// init all states to false
 	for( int i = 0; i < 322; i++) {
@@ -22,13 +22,13 @@ void cGlaceInput::InitializeInput()
 }
 
 // close SDL_GAMECONTROLLER_SUBSYSTEM
-void cGlaceInput::Shutdown()
+void CInputCore::Shutdown()
 {
 
 }
 
 // read all inputs kb+mouse+controller
-void cGlaceInput::ReadInput()
+void CInputCore::ReadInput()
 {
     // copy prev frame keys
 	for ( int x = 0; x < 322 ; x++) m_LastKeyState[x] = m_KeyPressState[x];
@@ -41,7 +41,7 @@ void cGlaceInput::ReadInput()
 
 }
 
-bool cGlaceInput::KeyDown( SDL_Keycode Key )
+bool CInputCore::KeyDown( SDL_Keycode Key )
 {
   // KLUDGE: Key initializes to some huge nuymber somewhere without this....
   if (Key > 321) return false;
@@ -51,7 +51,7 @@ bool cGlaceInput::KeyDown( SDL_Keycode Key )
   return false;
 }
 
-bool cGlaceInput::KeyPress(SDL_Keycode Key)
+bool CInputCore::KeyPress(SDL_Keycode Key)
 {
     // KLUDGE: Key initializes to some huge nuymber somewhere without this....
 	if (Key > 321) return false;
@@ -62,7 +62,7 @@ bool cGlaceInput::KeyPress(SDL_Keycode Key)
 	return false;
 }
 
-void cGlaceInput::CancelAllInput() {
+void CInputCore::CancelAllInput() {
 	for( int i = 0; i < 322; i++ )
 		m_KeyPressState[i] = 0;
 }
