@@ -10,12 +10,13 @@ int main(int argc, char *argv[]){
     std::string *str_font = new std::string(fontname);
     gFont_28.Create(str_font, 28);
 
-    CGraphics core;
-    core.Init();
+    CGraphicsCore core;
+    // pass the SDL flags we want to use to Init()
+    core.Init(SDL_INIT_EVERYTHING);
     
     //Texture for text to be rendered, must happen after  core is initilized, as our gTexture class 
     //holds a pointer to the renderer
-    cTexture gText;
+    CTexture gText;
     gText.CreateFontTexture(&core, &gFont_28, "HELLO WORLD", 128, 128, 128);
 
 
