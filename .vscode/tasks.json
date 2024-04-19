@@ -7,7 +7,7 @@
             "label": "Windows Make (Debug)",
             "type": "shell",
             "windows": { "command":  "${env:MSYS_BIN_PATH}\\make.exe -f Makefile.win"},
-            "osx": { "command":  "make-f Makefile.osx"},
+            "osx": { "command":  "make -f Makefile.osx"},
             "linux": { "command":  "make"},
             "problemMatcher": [
                 "$gcc"
