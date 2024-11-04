@@ -13,18 +13,25 @@ CInputCore::~CInputCore()
 //Keyboard works out of the box, TODO: initialize the Controller here
 void CInputCore::InitializeInput()
 {
+	
 	// init all states to false
 	for( int i = 0; i < 322; i++) {
 		m_KeyPressState[i] = false;
 		m_LastKeyState[i] = false;
 	}
 	// todo:: init joysticks
+	// this assumes INIT_EVERYTHING  - code from lazy foo to start
+	if( SDL_NumJoysticks() > 0 ) gGameController = SDL_JoystickOpen( 0 );
+	if( gGameController == NULL) printf("WARN: no gamepads detected");
+
 }
 
 // close SDL_GAMECONTROLLER_SUBSYSTEM
 void CInputCore::Shutdown()
 {
-
+    //Close game controller
+    SDL_JoystickClose( gGameController );
+    gGameController = NULL;
 }
 
 // read all inputs kb+mouse+controller
@@ -65,4 +72,10 @@ bool CInputCore::KeyPress(SDL_Keycode Key)
 void CInputCore::CancelAllInput() {
 	for( int i = 0; i < 322; i++ )
 		m_KeyPressState[i] = 0;
+}
+
+bool CInputCore::JoyDetected(){
+  if (this->gGameController != nullptr) return true;
+
+  return false;
 }
