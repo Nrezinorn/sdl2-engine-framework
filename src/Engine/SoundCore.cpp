@@ -1,4 +1,5 @@
 #include "SoundCore.h"
+#include <SDL2/SDL_mixer.h>
 #include <iostream>
 #include <cstring>
 
@@ -47,6 +48,15 @@ void cSoundCore::Initialize()
 	
 	if (Mix_Init(MIX_INIT_MID) < 0) 
 		std::cout << "Sound Init failed" << std::endl;
+
+	//sprintf( "%s" , Mix_GetSoundFonts());
+
+	#ifdef __LINUX__ // playing around  on linux...
+	if( Mix_SetSoundFonts("Soundfonts/gm.sf2") < 1)
+		std::cout << "Soundfont Load Failure" << std::endl;
+	
+	//sprintf( "%s" , Mix_GetSoundFonts());
+	#endif
 
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY,MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 		this->mb_Dead=true;
