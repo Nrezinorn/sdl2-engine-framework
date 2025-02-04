@@ -5,7 +5,7 @@
 #if __APPLE__
 #include <SDL2_ttf/SDL_ttf.h>
 #endif
-#if __WIN32__
+#if __WIN32__ || __LINUX__
 #include <SDL2/SDL_ttf.h>
 #endif
 #include <string>
