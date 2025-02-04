@@ -28,14 +28,18 @@ public:
 
 	void CancelAllInput();
 
+	bool JoyDetected();
+
 
 private:
     //temp var
 	//const Uint8 *keyStates;
-	bool m_KeyPressState[322];
-	bool m_LastKeyState[322];
+	bool m_KeyPressState[322] = {false};
+	bool m_LastKeyState[322] = {false};
 
     Uint32 m_MouseState;
 	SDL_Point m_MousePos;
 
+	// gamepad
+	SDL_Joystick* gGameController = nullptr;
 };
