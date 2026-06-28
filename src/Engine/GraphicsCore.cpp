@@ -5,8 +5,8 @@ CGraphicsCore::CGraphicsCore()
 {
   m_window = NULL;
   m_renderer = NULL;
-  m_Width  = 640;
-  m_Height = 480;
+  m_Width  = 800;
+  m_Height = 600;
   // start in windowed mode for testing
   m_Windowed = true;
   //SDL_Rect textureLocation = { 0, 0, 640, 480};

@@ -34,8 +34,8 @@ public:
 private:
     //temp var
 	//const Uint8 *keyStates;
-	bool m_KeyPressState[322] = {false};
-	bool m_LastKeyState[322] = {false};
+	bool m_KeyPressState[SDL_NUM_SCANCODES] = {false};
+	bool m_LastKeyState[SDL_NUM_SCANCODES] = {false};
 
     Uint32 m_MouseState;
 	SDL_Point m_MousePos;

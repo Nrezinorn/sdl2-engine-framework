@@ -1,4 +1,5 @@
 #include "InputCore.h"
+#include <SDL2/SDL_scancode.h>
 
 CInputCore::CInputCore()
 {
@@ -15,7 +16,7 @@ void CInputCore::InitializeInput()
 {
 	
 	// init all states to false
-	for( int i = 0; i < 322; i++) {
+	for( int i = 0; i < SDL_NUM_SCANCODES; i++) {
 		m_KeyPressState[i] = false;
 		m_LastKeyState[i] = false;
 	}
@@ -44,14 +45,14 @@ void CInputCore::ReadInput()
 	const Uint8 *keyStates = SDL_GetKeyboardState(NULL);
 
 	//copy states into currentstates
-    for ( int i = 0; i < 322 ; i++) m_KeyPressState[i] = keyStates[i];
+    for ( int i = 0; i < SDL_NUM_SCANCODES ; i++) m_KeyPressState[i] = keyStates[i];
 
 }
 
 bool CInputCore::KeyDown( SDL_Keycode Key )
 {
   // KLUDGE: Key initializes to some huge nuymber somewhere without this....
-  if (Key > 321) return false;
+  if (Key > SDL_NUM_SCANCODES) return false;
   if (m_KeyPressState[Key]){
 	  return true;
   }
@@ -61,7 +62,7 @@ bool CInputCore::KeyDown( SDL_Keycode Key )
 bool CInputCore::KeyPress(SDL_Keycode Key)
 {
     // KLUDGE: Key initializes to some huge nuymber somewhere without this....
-	if (Key > 321) return false;
+	if (Key > SDL_NUM_SCANCODES) return false;
 
 	if (m_KeyPressState[Key] && !m_LastKeyState[Key]) { 
 		return true;
